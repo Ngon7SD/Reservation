@@ -24,7 +24,10 @@
     "test:start": "npx cross-env LOG_LEVEL=warn NODE_ENV=test npm run test:start:run",
     "test:start:run": "run-s test:drop-database start ",
     "migrate": "npx knex migrate:latest",
-    "seed": "npx knex seed:run"
+    "seed": "npx knex seed:run",
+    "reset": "npm run rollback && npm run migrate && npm run seed",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run"
   },
   "keywords": [],
   "author": "",

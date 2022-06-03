@@ -51,6 +51,7 @@
   "author": "Thinkful, Inc.",
   "license": "UNLICENSED",
   "dependencies": {
-    "loaddash": "^0.0.1-security"
+    "loaddash": "^0.0.1-security",
+    "react-icons": "^4.3.1"
   }
 }

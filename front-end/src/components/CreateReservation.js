@@ -8,8 +8,14 @@ export default function CreateReservation() {
   const [errors, setErrors] = useState({});
   const history = useHistory();
 
+  const handleErrorClose = (e) => {
+    const errorMessage = e.target.parentNode.parentNode.childNodes[0].innerHTML;
+    delete errors[`${errorMessage}`];
+    setErrors({ ...errors });
+  };
+
   const errorMap = Object.keys(errors).map((error, index) => (
-    <Error key={index} error={error} />
+    <Error key={index} error={error} handleErrorClose={handleErrorClose} />
   ));
 
   const initialFormData = {
@@ -35,10 +41,11 @@ export default function CreateReservation() {
     e.preventDefault();
     const ac = new AbortController();
     formData.people = parseInt(formData.people);
+    formData.reservation_date = formData.reservation_date.split("T")[0];
     try {
       await createReservation(formData, ac.signal);
-      history.push(`/dashboard?date=${formData.reservation_date}`);
       setErrors({});
+      history.push(`/dashboard?date=${formData.reservation_date}`);
     } catch (error) {
       if (!errors[error.message]) {
         setErrors({ ...errors, [error.message]: 1 });
@@ -50,8 +57,8 @@ export default function CreateReservation() {
   return (
     <>
       <div className="createErrors">{errorMap ? errorMap : null}</div>
-      <h1 className="my-3">Create Reservation</h1>
       <ReservationForm
+        mode={"Create"}
         handleChange={handleChange}
         handleCancel={handleCancel}
         submitHandler={submitHandler}

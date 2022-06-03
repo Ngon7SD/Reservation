@@ -1,17 +1,14 @@
 import React from "react";
-
+import CreateReservation from "../components/CreateReservation";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import { today } from "../utils/date-time";
-import CreateReservation from "../components/CreateReservation";
-/**
- * Defines all the routes for the application.
- *
- * You will need to make changes to this file.
- *
- * @returns {JSX.Element}
- */
+import CreateTable from "../components/CreateTable";
+import SeatReservation from "../components/SeatReservation";
+import SearchPage from "../components/SearchPage";
+import EditReservation from "../components/EditReservation";
+
 function Routes() {
   return (
     <Switch>
@@ -23,6 +20,18 @@ function Routes() {
       </Route>
       <Route exact={true} path="/reservations">
         <Redirect to={"/dashboard"} />
+      </Route>
+      <Route path="/reservations/:reservation_id/seat">
+        <SeatReservation />
+      </Route>
+      <Route path="/reservations/:reservation_id/edit">
+        <EditReservation />
+      </Route>
+      <Route path="/tables/new">
+        <CreateTable />
+      </Route>
+      <Route path="/search">
+        <SearchPage />
       </Route>
       <Route path="/dashboard">
         <Dashboard date={today()} />
