@@ -52,6 +52,6 @@
   "license": "UNLICENSED",
   "dependencies": {
     "loaddash": "^0.0.1-security",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.4.0"
   }
 }
